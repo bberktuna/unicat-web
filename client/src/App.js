@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "./apolloClient";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import { Container } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
+
+import { MenuBar } from "./components";
+import { Home, Login, Register } from "./pages";
+import { AuthProvider } from "./context/auth";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <ApolloProvider client={apolloClient}>
+        <Router>
+          <Container>
+            <MenuBar />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </Container>
+        </Router>
+      </ApolloProvider>
+    </AuthProvider>
   );
 }
 
