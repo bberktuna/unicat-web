@@ -12,6 +12,7 @@ import "semantic-ui-css/semantic.min.css";
 import { MenuBar } from "./components";
 import { Home, Login, Register } from "./pages";
 import { AuthProvider } from "./context/auth";
+import AuthRoute from "./util/AuthRoute";
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
           <Container>
             <MenuBar />
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <AuthRoute exact path="/login" component={Login} />
+            <AuthRoute exact path="/register" component={Register} />
           </Container>
         </Router>
       </ApolloProvider>
